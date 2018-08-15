@@ -1,4 +1,4 @@
-<?php namespace CodeZero\Twitter; 
+<?php namespace CodeZero\Twitter;
 
 use CodeZero\Courier\Courier;
 use CodeZero\Courier\CurlCourier;
@@ -128,7 +128,7 @@ class TwitterCourier {
             if ($response->getResponseType() == 'application/json')
             {
                 $response = $response->toArray();
-                $error = sprintf('Twitter Error: %s (Error %d)', $response['errors'][0]['message'], $response['errors'][0]['code']);
+                $error = sprintf('Twitter Error: %s', json_encode($response));
             }
             else
             {
