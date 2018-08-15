@@ -128,14 +128,14 @@ class TwitterCourier {
             if ($response->getResponseType() == 'application/json')
             {
                 $response = $response->toArray();
-                $error = sprintf('Twitter Error: %s', json_encode($response));
+                $error = sprintf('Twitter Error: %s (Error %d)', $response['errors'][0]['message'], $response['errors'][0]['code']);
             }
             else
             {
                 $error = sprintf('HTTP Error: %s (Error %d)', $exception->getMessage(), $exception->getCode());
             }
 
-            throw new TwitterException($error);
+            throw new TwitterException($error, $response['errors'][0]['code'] ?? null);
         }
     }
 
